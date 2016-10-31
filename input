@@ -1,0 +1,15 @@
+BEGIN
+PRINT "HELLO"
+INTEGER A, B, C
+REAL   D, E
+STRING X, Y
+A := 2
+B := 4
+C := 6
+D := -3.56E-8
+E := 4.567
+X := "text1"
+Y := "hello there"
+FOR I:= 1 TO 5  
+PRINT "Strings are [X] and [Y]"
+END
