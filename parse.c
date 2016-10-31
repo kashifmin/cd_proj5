@@ -131,7 +131,16 @@ int actionTable[31][22] = {
 };
 
 void parse() {
+    int currToken;
+    int stackTop;
     // uses actionTable and identifiedTokens to check if the program is valid or not
+    struct stack pStack;
+    pStack.top = -1;
+    push(&pStack, 0);
+
+    while(1) {
+        
+    }
 }
 
 int main(int argc, char* argv[])

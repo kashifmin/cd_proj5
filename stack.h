@@ -22,3 +22,11 @@ int pop(struct stack *theStack) {
 		return theStack->top--;
 	}
 }
+
+int getStackTop(struct stack *theStack) {
+	if(theStack->top == -1) {
+		printf("Stack is empty!\n");
+		exit(0);
+	} else 
+		return theStack->items[theStack->top];
+}
