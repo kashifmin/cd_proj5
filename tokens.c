@@ -5,7 +5,7 @@
 FILE *fp;
 char ch;
 char inputCode[300];
-char idTable[50][30], numTable[50];
+char idTable[50][30] /*,numTable[50] */;
 int codeLength = 0;
 
  char tokenList[14][20] = {
@@ -37,24 +37,22 @@ int state = 0, start = 0;
 int lex_val;
 
 char nextChar();
+void retract(int);
 
 int installId()
 {
     int i;
     char id[30];
-   // printf("lexeme_beg is %d\n", lexeme_beg);
-   // printf("Forward is %d\n", forward);
     for(i=lexeme_beg; i<=forward; i++) {
-       // printf("\ni is  %d\ni-lb is %d", i, i-lexeme_beg);
         id[i-lexeme_beg] = inputCode[i];
     }
     id[i-lexeme_beg] = '\0';
-   // printf("i am in installid\n");
     strcpy(idTable[idCount++], id);
     
     return idCount-1; 
 }
 
+/*
 int installNum()
 {
     int i;
@@ -64,9 +62,9 @@ int installNum()
     strcpy(numTable[idCount++], id);
     return numCount-1; 
 }
+*/
 
 int fail() {
-    //forward = lexeme_beg;
     switch(state) {
         case 0:
             retract(1);
@@ -150,10 +148,7 @@ int nextToken() {
         /*** STRING LITERALS ***/
 
             case 43:
-             //   printf("FORWARD IS %d\n", forward);
                 ch = nextChar();
-               // printf("Entered state 43 %c\n", ch);
-               // exit(0);
                 if(ch == 34) // double quote
                     state = 44;
                 else state = fail();
@@ -301,9 +296,6 @@ int nextToken() {
                     state = 36;
                 
                 else {
-                      //  printf("next char in 0 is %c\n", inputCode[forward+1]);
-                       // printf("FOrward is %d\n", forward);
-
                     state = fail();
                 }
                 break;
@@ -483,13 +475,6 @@ int nextToken() {
             case 33:    
                 
                 return 1;
-        //      case 34:
-        //          ch = nextChar();
-        //          //printf("CH in 35 = %c", ch);
-        //          if(ch == ':')
-        //              state=35;
-        //          else state = fail();
-        //          break;
 
             case 36:
                 ch = nextChar();
@@ -500,7 +485,6 @@ int nextToken() {
                 break;
             case 37:
                 return 12;       
-
 
             default:
                 return 0;
@@ -531,17 +515,5 @@ void tokenize(char* inputFile) {
         inputCode[codeLength++] = fgetc(fp);
     }
 
-
     inputCode[codeLength-1] = '\0';
-
-/*    while(forward < codeLength) {
-        identifiedTokens[itCount++] = nextToken();
-     //   printf("\n%s", tokenList[ nextToken() - 1 ]);
-  //      tokens[i++] = nextToken();
-    }*/
-
-/*    printf("\nIDENTIFIERS are \n");
-    for(i=0; i<idCount; i++) {
-        printf("%s\n", idTable[i]);
-    }*/
 }
