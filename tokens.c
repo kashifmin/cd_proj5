@@ -275,14 +275,14 @@ int nextToken() {
             case 0: 
                 ch = nextChar();
                 if(ch == '\0') {
-                    return 15;
+                    return 13;
                 }
                 if(ch == '\n' || ch == '\t' || ch == ' ') {
                     state = 0;
                     lexeme_beg = forward;
                 }
                 else if(ch == ',')
-                    return 13;
+                    return 9;
                 else if(ch == 'B')
                     state = 1;
                 else if(ch == 'P')
@@ -530,6 +530,7 @@ void tokenize(char* inputFile) {
     while(!feof(fp)) {
         inputCode[codeLength++] = fgetc(fp);
     }
+
 
     inputCode[codeLength-1] = '\0';
 
