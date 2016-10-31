@@ -8,22 +8,22 @@ char inputCode[300];
 char idTable[50][30], numTable[50];
 int codeLength = 0;
 
-char tokenList[30][30] = { "BEGIN", //0
-              "PRINT",
-              "INTEGER",
-              "REAL",
-              "STRING",
-              "FOR",
-              "END",
-              ":=",
-              "TO",
-              "IDENTIFIER",
-              " ",
-              "STR LITERALS",
-              "COMMA",
-              "NUMBER", //13
-              "NULL"
-            };
+ char tokenList[14][20] = {
+    "BEGIN", //0
+    "END", //1
+    "ID", //2
+    ":=", //3
+    "NUM", //4
+    "STR LITERAL", //5
+    "INTEGER", //6
+    "REAL", //7
+    "STRING", //8
+    "COMMA", //9
+    "PRINT", //10
+    "FOR", //11
+    "TO", //12
+    "$" //13
+ };
 
 int identifiedTokens[100]; // Stores indices of tokens after lexical analysis
 int itCount = 0;
@@ -142,7 +142,7 @@ int nextToken() {
             case 42:
                 retract(1);
                 installId();
-                return 10;
+                return 2;
 
         /*** END IDENTIFIERS ***/
 
@@ -169,7 +169,7 @@ int nextToken() {
                 break;
 
             case 45:
-                return 12;
+                return 5;
 
 
         /*** END STRING LITERALS ***/
@@ -193,7 +193,7 @@ int nextToken() {
                     state = fail();
                 break;
             case 53:
-                return 8;
+                return 3;
         /*** END ASSIGNMENT OPERATOR ***/
 
         /*** NUMBERS OR NUMERIC LITERALS ***/
@@ -267,7 +267,7 @@ int nextToken() {
                 break;
             case 61:
                 retract(1);
-                return 14;
+                return 4;
 
             /*** END NUMBERS OR NUMERIC LITERALS ***/
 
@@ -333,7 +333,7 @@ int nextToken() {
                 break;
 
             case 5: 
-                return 1;
+                return 0;
             case 6:
                 ch = nextChar();
                 if(ch == 'R')
@@ -361,7 +361,7 @@ int nextToken() {
 
             case 10:    
                 
-                return 2;
+                return 10;
             case 11:
                 ch = nextChar();
                 if(ch == 'N')
@@ -400,7 +400,7 @@ int nextToken() {
                 break;
             case 17:    
                 
-                return 3;
+                return 6;
             case 18:
                 ch = nextChar();
                 if(ch == 'E')
@@ -421,7 +421,7 @@ int nextToken() {
                 break;
             case 21:    
                 
-                return 4;
+                return 7;
             case 22:
                 ch = nextChar();
                 if(ch == 'T')
@@ -453,7 +453,7 @@ int nextToken() {
                 else state = fail();
                 break;
             case 27:    
-                return 5;       
+                return 8;       
             case 28:
                 ch = nextChar();
                 if(ch == 'O')
@@ -467,7 +467,7 @@ int nextToken() {
                 else state = fail();
                 break;
             case 30:    
-                return 6;
+                return 11;
             case 31:
                 ch = nextChar();
                 if(ch == 'N')
@@ -482,7 +482,7 @@ int nextToken() {
                 break;
             case 33:    
                 
-                return 7;
+                return 1;
         //      case 34:
         //          ch = nextChar();
         //          //printf("CH in 35 = %c", ch);
@@ -499,7 +499,7 @@ int nextToken() {
                     state = fail();
                 break;
             case 37:
-                return 9;       
+                return 12;       
 
 
             default:
@@ -534,13 +534,13 @@ void tokenize(char* inputFile) {
     inputCode[codeLength-1] = '\0';
 
     while(forward < codeLength) {
-        identifiedTokens[itCount++] = nextToken() - 1;
+        identifiedTokens[itCount++] = nextToken();
      //   printf("\n%s", tokenList[ nextToken() - 1 ]);
   //      tokens[i++] = nextToken();
     }
 
-    printf("\nIDENTIFIERS are \n");
+/*    printf("\nIDENTIFIERS are \n");
     for(i=0; i<idCount; i++) {
         printf("%s\n", idTable[i]);
-    }
+    }*/
 }
