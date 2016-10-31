@@ -67,7 +67,7 @@ productions[16].symLength = 7;
 /*
  * This stores what each column means in the actionTable.
  */
- int aTColumns[24][20] = {
+ char aTColumns[14][20] = {
     "BEGIN", //0
     "END", //1
     "ID", //2
@@ -127,7 +127,9 @@ int actionTable[31][22] = {
     {0,-16,  0,  0,  0,  0,-16,-16,-16,  0,-16,-16,  0,  0,    0,  0,  0,  0,  0,  0,  0,  0}   //30
 };
 
-void parse()
+void parse() {
+    // uses actionTable and identifiedTokens to check if the program is valid or not
+}
 
 int main(int argc, char* argv[])
 {
@@ -141,8 +143,8 @@ int main(int argc, char* argv[])
 
     printf("\nInfo from token table  \n");
     for(i=0; i<itCount; i++) {
-       // printf("%d\n", identifiedTokens[i]); // print token indices
-    	printf("%s\n", tokenList[i]); // print tokens in the identified order
+        printf("%d\n", identifiedTokens[i]); // print token indices
+    	//printf("%s\n", tokenList[i]); // print tokens in the identified order
     }
 
 
