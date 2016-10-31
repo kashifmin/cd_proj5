@@ -534,11 +534,11 @@ void tokenize(char* inputFile) {
 
     inputCode[codeLength-1] = '\0';
 
-    while(forward < codeLength) {
+/*    while(forward < codeLength) {
         identifiedTokens[itCount++] = nextToken();
      //   printf("\n%s", tokenList[ nextToken() - 1 ]);
   //      tokens[i++] = nextToken();
-    }
+    }*/
 
 /*    printf("\nIDENTIFIERS are \n");
     for(i=0; i<idCount; i++) {
