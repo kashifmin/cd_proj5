@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "stack.h"
 #include "tokens.c"
 
 struct production {
@@ -6,62 +7,64 @@ struct production {
     int symLength; // count of terminals on the RHS i.e |a| in S-->a
 } productions[17];
 
+void initProductions() {
 /*
  * Here we store all the productions
  */
-productions[0].number = 0;
-productions[0].symLength = 1;
+    productions[0].number = 0;
+    productions[0].symLength = 1;
 
-productions[1].number = 14;
-productions[1].symLength = 3;
+    productions[1].number = 14;
+    productions[1].symLength = 3;
 
-productions[2].number = 15;
-productions[2].symLength = 1;
+    productions[2].number = 15;
+    productions[2].symLength = 1;
 
-productions[3].number = 15;
-productions[3].symLength = 2;
+    productions[3].number = 15;
+    productions[3].symLength = 2;
 
-productions[4].number = 16;
-productions[4].symLength = 3;
+    productions[4].number = 16;
+    productions[4].symLength = 3;
 
-productions[5].number = 16;
-productions[5].symLength = 2;
+    productions[5].number = 16;
+    productions[5].symLength = 2;
 
-productions[6].number = 16;
-productions[6].symLength = 1;
+    productions[6].number = 16;
+    productions[6].symLength = 1;
 
-productions[7].number = 16;
-productions[7].symLength = 1;
+    productions[7].number = 16;
+    productions[7].symLength = 1;
 
-productions[8].number = 17;
-productions[8].symLength = 1;
+    productions[8].number = 17;
+    productions[8].symLength = 1;
 
-productions[8].number = 17;
-productions[8].symLength = 1;
+    productions[8].number = 17;
+    productions[8].symLength = 1;
 
-productions[9].number = 17;
-productions[9].symLength = 1;
+    productions[9].number = 17;
+    productions[9].symLength = 1;
 
-productions[10].number = 18;
-productions[10].symLength = 1;
+    productions[10].number = 18;
+    productions[10].symLength = 1;
 
-productions[11].number = 18;
-productions[11].symLength = 1;
+    productions[11].number = 18;
+    productions[11].symLength = 1;
 
-productions[12].number = 18;
-productions[12].symLength = 1;
+    productions[12].number = 18;
+    productions[12].symLength = 1;
 
-productions[13].number = 19;
-productions[13].symLength = 1;
+    productions[13].number = 19;
+    productions[13].symLength = 1;
 
-productions[14].number = 19;
-productions[14].symLength = 3;
+    productions[14].number = 19;
+    productions[14].symLength = 3;
 
-productions[15].number = 20;
-productions[15].symLength = 2;
+    productions[15].number = 20;
+    productions[15].symLength = 2;
 
-productions[16].number = 21;
-productions[16].symLength = 7;
+    productions[16].number = 21;
+    productions[16].symLength = 7;
+}
 
 
 /*
@@ -143,9 +146,11 @@ int main(int argc, char* argv[])
 
     printf("\nInfo from token table  \n");
     for(i=0; i<itCount; i++) {
-        printf("%d\n", identifiedTokens[i]); // print token indices
+        printf("%s\n", tokenList[identifiedTokens[i]]); // print token indices
     	//printf("%s\n", tokenList[i]); // print tokens in the identified order
     }
+
+    initProductions();
 
 
     return 0;
