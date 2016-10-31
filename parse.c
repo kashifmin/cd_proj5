@@ -191,7 +191,7 @@ int main(int argc, char* argv[])
         exit(0);
     }
 
-    tokenize(argv[1]);
+    initLexer(argv[1]);
 
     initProductions();
 

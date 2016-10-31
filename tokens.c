@@ -517,17 +517,16 @@ void retract(int f) {
     forward = forward - f;
 }
 
-void tokenize(char* inputFile) {
 
-    int tCount = 0;
-    int i = 0;
-    int tokens[100];
-
+/*
+ * Initializes the variable inputCode[] with
+ * Characters from the inputFile
+ */
+void initLexer(char* inputFile) {
     fp = fopen(inputFile, "r");
 
     while(!feof(fp)) {
         inputCode[codeLength++] = fgetc(fp);
     }
-
     inputCode[codeLength-1] = '\0';
 }
