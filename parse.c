@@ -164,7 +164,7 @@ void parse() {
             push(&pStack, action); // push j to the stack
             currToken = nextToken(); // advance input
         } else if(action == -50) {
-            printf("Accept!\n");
+            printf("ACCEPT!\n");
             return;
         } else if(action < 0) {
             printf("Reduce by %d\n", -action);
@@ -178,8 +178,12 @@ void parse() {
             push(&pStack, actionTable[stackTop][reduceBy.number]); // push action[S, A] on to the stack
 
 
+        } else {
+            printf("PARSING ERROR!\n");
+            return;
         }
     }
+
 }
 
 int main(int argc, char* argv[])
