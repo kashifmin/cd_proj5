@@ -64,6 +64,10 @@ int installNum()
 }
 */
 
+
+/*
+ * Returns the starting state of next DFA to be processed
+ */
 int fail() {
     switch(state) {
         case 0:
@@ -111,6 +115,10 @@ int fail() {
     return start;
 }
 
+
+/* Returns the tokenNo (according to the order specified in tokenList)
+ * of the identified token
+ */
 int nextToken() {
 
     state = 0;
@@ -495,10 +503,16 @@ int nextToken() {
 
 }
 
+/* Returns the next character that is to be processed
+ * from the input file
+ */
 char nextChar() {
     return inputCode[++forward];
 }
 
+/*
+ * Decrements the forward pointer by 'f'
+ */
 void retract(int f) {
     forward = forward - f;
 }
