@@ -91,7 +91,7 @@ void initProductions() {
 
 /*
  *
- * Below is an action table (parse table) for the grammar to parse the tokens
+ * Below is an action table (CLR parse table) for the grammar to parse the tokens
  * 0 --> empty
  * postive i--> goto state i
  * negative i --> reduce by production number i
@@ -151,12 +151,6 @@ void parse() {
         action = actionTable[stackTop][currToken];
 
         printf("Proccessing token %s\n", tokenList[currToken]);
-
-      /*  if(currToken == 13) {
-            printf("Stack top is %d\n action is %d", stackTop, action);
-            printf("\ntop == %d\n", pStack.top);
-            exit(0);
-        }*/
 
         if(action > 0) { // Shift
             printf("Shift by %d\n", action);
