@@ -123,7 +123,6 @@ int actionTable[31][22] = {
     {0, -4, -4,  0,  0,  0, -4, -4, -4,  0, -4, -4,  0,  0,    0,  0,  0,  0,  0,  0,  0,  0},  //21
     {0, -8, -8,  0,  0,  0, -8, -8, -8,  0, -8, -8,  0,  0,    0,  0,  0,  0,  0,  0,  0,  0},  //22
     {0, -9, -9,  0,  0,  0, -9, -9, -9,  0, -9, -9,  0,  0,    0,  0,  0,  0,  0,  0,  0,  0},  //23
-   // {0,-14, 26,  0,  0,  0,-14,-14,-14,-14,-14,-14,  0,  0,    0,  0,  0,  0,  0,  0,  0,  0},  //24
     {0,  0, 26,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,    0,  0,  0,  0,  0,  0,  0,  0},  //24
     {0,  0,  0,  0, 27,  0,  0,  0,  0,  0,  0,  0,  0,  0,    0,  0,  0,  0,  0,  0,  0,  0},  //25
     {0,-14,-14,  0,  0,  0,-14,-14,-14,-14,-14,-14,  0,  0,    0,  0,  0,  0,  0,  0,  0,  0},  //26
@@ -153,7 +152,7 @@ void parse() {
         printf("Proccessing token %s\n", tokenList[currToken]);
 
         if(action > 0) { // Shift
-            printf("Shift by %d\n", action);
+            printf("Shift and go to state %d\n", action);
             push(&pStack, currToken);
             push(&pStack, action); // push j to the stack
             currToken = nextToken(); // advance input
@@ -161,7 +160,7 @@ void parse() {
             printf("ACCEPT!\n");
             return;
         } else if(action < 0) {
-            printf("Reduce by %d\n", -action);
+            printf("Reduce by production number %d\n", -action);
             // we have to pop 2*|a| items from the stack given by production number '|action|'
             reduceBy = productions[-action];
             for(i=1; i <= 2 * reduceBy.symLength; i++)
