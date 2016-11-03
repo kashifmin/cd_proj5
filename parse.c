@@ -192,6 +192,16 @@ int main(int argc, char* argv[])
 
     initProductions();
 
+    // Remove the comments below if you want to print only tokens
+    
+/*    while(forward < codeLength-1) {
+    	printf("\n%s", tokenList[nextToken()]);
+    }
+    printf("\n");
+    forward = -1;
+*/
+
+
     parse();
 
 
