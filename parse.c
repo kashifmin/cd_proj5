@@ -5,6 +5,7 @@
 struct production {
     int number; // The column number in parse table of the LHS
     int symLength; // count of terminals on the RHS i.e |a| in S-->a
+    char prodString[30];
 } productions[17];
 
 void initProductions() {
@@ -13,57 +14,71 @@ void initProductions() {
  */
     productions[0].number = 0;
     productions[0].symLength = 1;
+    strcpy(productions[0].prodString, "S' --> S");
 
     productions[1].number = 14;
     productions[1].symLength = 3;
+    strcpy(productions[1].prodString, "S --> begin A end");
 
     productions[2].number = 15;
     productions[2].symLength = 1;
+    strcpy(productions[2].prodString, "A --> B");
 
     productions[3].number = 15;
     productions[3].symLength = 2;
+    strcpy(productions[3].prodString, "A --> AB");
 
     productions[4].number = 16;
     productions[4].symLength = 3;
+    strcpy(productions[4].prodString, "B --> id := D");
 
     productions[5].number = 16;
     productions[5].symLength = 2;
+    strcpy(productions[5].prodString, "B --> EF");
 
     productions[6].number = 16;
     productions[6].symLength = 1;
+    strcpy(productions[6].prodString, "B --> G");
 
     productions[7].number = 16;
     productions[7].symLength = 1;
+    strcpy(productions[7].prodString, "B --> H");
 
     productions[8].number = 17;
     productions[8].symLength = 1;
-
-    productions[8].number = 17;
-    productions[8].symLength = 1;
+    strcpy(productions[8].prodString, "D --> num");
 
     productions[9].number = 17;
     productions[9].symLength = 1;
+    strcpy(productions[9].prodString, "D --> str");
 
     productions[10].number = 18;
     productions[10].symLength = 1;
+    strcpy(productions[10].prodString, "E --> integer");
 
     productions[11].number = 18;
     productions[11].symLength = 1;
+    strcpy(productions[11].prodString, "E --> real");
 
     productions[12].number = 18;
     productions[12].symLength = 1;
+    strcpy(productions[12].prodString, "E --> string");
 
     productions[13].number = 19;
     productions[13].symLength = 1;
+    strcpy(productions[13].prodString, "F --> id");
 
     productions[14].number = 19;
     productions[14].symLength = 3;
+    strcpy(productions[14].prodString, "F --> F , id");
 
     productions[15].number = 20;
     productions[15].symLength = 2;
+    strcpy(productions[15].prodString, "G --> print str");
 
     productions[16].number = 21;
     productions[16].symLength = 7;
+    strcpy(productions[16].prodString, "H --> for id := num to num G");
 }
 
 
@@ -157,12 +172,13 @@ void parse() {
             push(&pStack, action); // push j to the stack
             currToken = nextToken(); // advance input
         } else if(action == -50) {
-            printf("ACCEPT!\n");
+            printf("\n****************ACCEPT!****************\n");
             return;
-        } else if(action < 0) {
-            printf("Reduce by production number %d\n", -action);
-            // we have to pop 2*|a| items from the stack given by production number '|action|'
+        } else if(action < 0) { // Reduce
             reduceBy = productions[-action];
+            printf("Reduce by production %s\n", reduceBy.prodString);
+
+            // we have to pop 2*|a| items from the stack given by production number '|action|'
             for(i=1; i <= 2 * reduceBy.symLength; i++)
                 pop(&pStack);
 
@@ -172,7 +188,7 @@ void parse() {
 
 
         } else {
-            printf("PARSING ERROR!\n");
+            printf("\n****************PARSING ERROR!****************\n");
             return;
         }
     }
