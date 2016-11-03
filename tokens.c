@@ -25,10 +25,10 @@ int codeLength = 0;
     "$" //13
  };
 
-int identifiedTokens[100]; // Stores indices of tokens after lexical analysis
-int itCount = 0;
+//int identifiedTokens[100]; // Stores indices of tokens after lexical analysis
+//int itCount = 0;
 
-char symTable[50][30];
+//char symTable[50][30];
 int idCount = 0;
 int numCount = 0;
 int forward = -1;

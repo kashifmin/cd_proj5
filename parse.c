@@ -5,7 +5,7 @@
 struct production {
     int number; // The column number in parse table of the LHS
     int symLength; // count of terminals on the RHS i.e |a| in S-->a
-    char prodString[30];
+    char prodString[30]; // holds the production string in the form of "S --> aAb"
 } productions[17];
 
 void initProductions() {
@@ -210,14 +210,16 @@ int main(int argc, char* argv[])
 
     // Remove the comments below if you want to print only tokens
     
-/*    while(forward < codeLength-1) {
+  
+    printf("\n*********OUTPUT FROM LEXER***********\n");
+    while(forward < codeLength-1) {
     	printf("\n%s", tokenList[nextToken()]);
     }
     printf("\n");
-    forward = -1;
-*/
+    forward = -1; // reset the forward pointer so that the parser can read using nextToken() again
 
 
+    printf("\n*********OUTPUT FROM PARSER***********\n\n");
     parse();
 
 
